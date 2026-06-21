@@ -2,7 +2,7 @@ resource "aws_s3_bucket" "medallion-bucket" {
   bucket = "fiap-datalake-tech"
 
   tags = {
-    Name        = "fiap-datalake-tech"
+    Name        = var.medallion-bucket
     Environment = "Dev"
   }
 }
@@ -14,3 +14,11 @@ resource "aws_s3_object" "layers" {
   content_type = "application/x-directory"
 }
 
+resource "aws_s3_bucket" "glue-scripts-bucket" {
+  bucket = "fiap-datalake-tech-glue-scripts"
+
+  tags = {
+    Name        = "fiap-datalake-tech-glue-scripts"
+    Environment = "Dev"
+  }
+}
