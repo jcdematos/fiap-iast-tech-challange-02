@@ -1,0 +1,13 @@
+# Application test and execution
+*.json
+load_env
+*.parquet
+
+# Python 
+venv
+__pycache__
+
+
+# OpenTofu/Terraform
+**/.terraform
+.terraform.lock.hcl
