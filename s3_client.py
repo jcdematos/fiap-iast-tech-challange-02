@@ -1,14 +1,13 @@
 import os
-import logging
 import boto3
+import logging
 #from botocore.exceptions import ClientError
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 aws_access_key = os.environ['AWS_ACCESS_KEY_ID']
 aws_secret_key = os.environ['AWS_SECRET_ACCESS_KEY']
 aws_region = 'us-east-1'
+
+logger = logging.getLogger(__name__)
 
 
 def upload_to_s3(df, table, config) -> None:

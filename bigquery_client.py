@@ -1,13 +1,11 @@
-import logging
 import hashlib
+import logging
 from datetime import datetime, timezone
 from google.cloud import bigquery
 from google.api_core.exceptions import GoogleAPIError
 from s3_client import upload_to_s3
 
-logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
 
 def ingest_from_bigquery(tables, config) -> None:
     INGESTION_TIMESTAMP = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")

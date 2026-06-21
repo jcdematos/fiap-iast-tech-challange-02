@@ -1,10 +1,5 @@
-import bigquery_client
-
 import logging
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
+import bigquery_client
 
 config = {
     'paths': {
@@ -21,6 +16,9 @@ config = {
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
+
     tables = ['alunos',
               'dicionario',
               'meta_alfabetizacao_brasil',
