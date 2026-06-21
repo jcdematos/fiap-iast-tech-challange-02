@@ -1,3 +1,3 @@
 locals {
-    layers = ["bronze", "silver", "gold", "quality_reports"]
+    layers = ["bronze/", "silver/", "gold/", "quality_reports/"]
 }
