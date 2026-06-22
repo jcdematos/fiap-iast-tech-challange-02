@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "medallion-bucket" {
+resource "aws_s3_bucket" "datalake" {
   bucket = local.datalake_bukcet
 
   tags = {
@@ -11,13 +11,13 @@ resource "aws_s3_bucket" "medallion-bucket" {
 
 resource "aws_s3_object" "layers" {
   for_each = toset(local.layers)
-  bucket       = aws_s3_bucket.medallion-bucket.id
+  bucket       = aws_s3_bucket.datalake.id
   key          = each.value
   content_type = "application/x-directory"
 
 }
 
-resource "aws_s3_bucket" "glue-scripts-bucket" {
+resource "aws_s3_bucket" "glue_scripts" {
   bucket = local.glue_scripts_bucket
 
   tags = {
