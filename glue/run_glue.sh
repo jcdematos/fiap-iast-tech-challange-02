@@ -61,17 +61,26 @@ fi
 
 SCRIPT_BASENAME="$(basename "$GLUE_SCRIPT")"
 WORKSPACE_LOCATION="$SCRIPT_DIR"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+SRC_ZIP="$REPO_ROOT/libs/src.zip"
 
 echo "WORKSPACE_LOCATION : $WORKSPACE_LOCATION"
 echo "AWS_DEFAULT_REGION : $AWS_DEFAULT_REGION"
 echo ""
 
+echo "[+] Packaging src/ -> libs/src.zip"
+mkdir -p "$REPO_ROOT/libs"
+(cd "$REPO_ROOT/src" && zip -r "$SRC_ZIP" . > /dev/null)
+echo "[+] Done"
+echo ""
+
 docker run -it --rm \
     -v "$WORKSPACE_LOCATION":/home/hadoop/workspace/ \
+    -v "$SRC_ZIP":/home/hadoop/src.zip \
     -e AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" \
     -e AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY" \
     -e AWS_DEFAULT_REGION="$AWS_DEFAULT_REGION" \
     ${AWS_SESSION_TOKEN:+-e AWS_SESSION_TOKEN="$AWS_SESSION_TOKEN"} \
     --name glue5_spark_submit \
     public.ecr.aws/glue/aws-glue-libs:5 \
-    spark-submit /home/hadoop/workspace/"$SCRIPT_BASENAME"
+    spark-submit --py-files /home/hadoop/src.zip /home/hadoop/workspace/"$SCRIPT_BASENAME"
