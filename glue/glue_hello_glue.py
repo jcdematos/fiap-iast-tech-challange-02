@@ -2,6 +2,7 @@ import boto3
 from botocore.exceptions import ClientError
 from awsglue.context import GlueContext
 from pyspark.context import SparkContext
+from hello import say_hello
 
 def hello_glue():
     """
@@ -37,6 +38,7 @@ if __name__ == "__main__":
     logger.error("error: message")
 
     hello_glue()
+    say_hello("Glue job")
 
 
 
