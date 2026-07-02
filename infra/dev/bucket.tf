@@ -26,3 +26,14 @@ resource "aws_s3_bucket" "glue_scripts" {
 
   force_destroy = true
 }
+
+resource "aws_s3_bucket" "athena_queries" {
+  bucket = local.athena_queries_bucket
+
+  tags = {
+    Name        = local.athena_queries_bucket
+    Environment = var.environment
+  }
+
+  force_destroy = true
+}
