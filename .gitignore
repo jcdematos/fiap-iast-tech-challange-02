@@ -3,9 +3,12 @@
 load_env
 *.parquet
 
-# Python 
+# Python
 venv
 __pycache__
+
+# Local raw data (Censo Escolar CSVs/zips)
+data/
 
 
 # OpenTofu/Terraform
